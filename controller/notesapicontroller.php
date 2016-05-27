@@ -162,6 +162,27 @@ class NotesApiController extends ApiController {
      * @NoCSRFRequired
      *
      * @param int $id
+     * @param string $content
+     * @return DataResponse
+     */
+    public function patch($id, $patch) {
+        return $this->respond(function () use ($id, $patch) {
+            $oldContent = $this->service->get($id, $this->userId)->content;
+            $differ = new \DiffMatchPatch\DiffMatchPatch();
+            $patches = $differ->patch_fromText($patch);
+            $patchResult = $differ->patch_apply($patches, $oldContent);
+            $newContent = $patchResult[0];
+            return $this->service->update($id, $newContent, $this->userId);
+        });
+    }
+
+
+    /**
+     * @NoAdminRequired
+     * @CORS
+     * @NoCSRFRequired
+     *
+     * @param int $id
      * @return DataResponse
      */
     public function destroy($id) {
