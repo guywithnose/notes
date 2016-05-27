@@ -13,6 +13,8 @@ namespace OCA\Notes\AppInfo;
 
 use OCP\AppFramework\App;
 
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
 $app = new App('notes');
 $container = $app->getContainer();
 

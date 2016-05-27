@@ -48,3 +48,6 @@ nbproject
 
 # Mac OS
 .DS_Store
+
+#Composer
+vendor

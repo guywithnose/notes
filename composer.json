@@ -1,0 +1,6 @@
+{
+  "name": "owncloud/notes",
+  "require": {
+    "yetanotherape/diff-match-patch": "~1.0"
+  }
+}
