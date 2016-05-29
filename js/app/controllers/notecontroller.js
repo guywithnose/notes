@@ -18,6 +18,15 @@ app.controller('NoteController', function($routeParams, $scope, NotesModel,
     };
 
     $scope.updateTitle = function () {
+        try {
+            var jsonData = JSON.parse($scope.note.content);
+            if (jsonData.title) {
+                $scope.note.title = jsonData.title;
+                return;
+            }
+        } catch (e) {
+        }
+
         $scope.note.title = $scope.note.content.split('\n')[0] ||
             t('notes', 'New note');
     };
