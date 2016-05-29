@@ -123,8 +123,13 @@ class NotesService {
         $folder = $file->getParent();
 
         // generate content from the first line of the title
-        $splitContent = preg_split("/\R/", $content, 2);
-        $title = $splitContent[0];
+        $jsonData = json_decode($content, true);
+        if (is_array($jsonData) && array_key_exists('title', $jsonData)) {
+            $title = $jsonData['title'];
+        } else {
+            $splitContent = preg_split("/\R/", $content, 2);
+            $title = $splitContent[0];
+        }
 
         if(!$title) {
             $title = $this->l10n->t('New note');
